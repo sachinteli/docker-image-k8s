@@ -35,8 +35,9 @@ node {
     }
 	
 	stage('Deploy to GKE') {
-            steps{
-                sh "sed -i 's/mytestapp1:latest/mytestapp1:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-            }
+	    steps{
+		sh "sed -i 's/mytestapp1:latest/mytestapp1:${env.BUILD_ID}/g' deployment.yaml"
+		step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+	    }
+	}
 }
